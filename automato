@@ -1,0 +1,98 @@
+#include<fstream>
+#include<iostream>
+#include<stdio.h>
+#include<cctype>
+
+using namespace std;
+
+ifstream arq_e("teste.txt");
+ofstream arq_s;
+
+char proximoChar(){
+    char ch;
+    arq_e.get(ch);
+    return(ch);
+}
+
+int main () {
+
+  fstream filestr;
+
+
+  char ch;
+
+  arq_s.open("teste.txt");
+
+  int Aceita[3];
+  int Avance[3][3];
+  int T[3][3];
+  int estado=0;
+
+
+  Aceita[0]=0;
+  Aceita[1]=0;
+  Aceita[2]=1;
+
+  //letra 0 digito 1 outro 2
+
+
+  T[0,0]=1;
+  T[1,0]=1;
+  T[1,1]=1;
+  T[1,2]=2;
+  Avance[0,0]=1;
+  Avance[1,0]=1;
+  Avance[1,0]=1;
+  Avance[1,2]=0;
+
+
+
+
+
+
+
+
+
+
+  int erro=0;
+  int novoestado;
+  int tipo;
+
+     ch=proximoChar();
+     cout << ch;
+     if(!Isalpha(ch)){
+         erro=1;
+     }
+     while((!Aceita[estado])&&!erro){
+         if(Isalpha(ch)){
+              tipo=0;
+         }
+           else{
+              if(Isdigit(ch)){
+                tipo=1;
+              }
+              else{
+                tipo=2;
+              }
+         }
+         novoestado=T[estado][ch];
+         if( Avance[estado][ch]){
+            ch=proximoChar();
+            cout << ch;
+            estado=novoestado;
+         }
+     }
+     if( Aceita[estado] ){
+
+     }
+
+     arq_s << ch;
+   }
+   // fecha o arquivo
+   arq_e.close();
+   arq_s.close();
+
+
+
+  return 0;
+}
